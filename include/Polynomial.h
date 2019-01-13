@@ -21,7 +21,9 @@ public:
     
     Polynomial operator- (const Polynomial&);
     
-    Polynomial increaseOrderTo(int order);
+    Polynomial increaseOrderTo(int order) const;
+    
+    void printPolynomial(const Polynomial& poly )const;
     
     vector<double> coeficients;
     int order;

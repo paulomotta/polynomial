@@ -25,6 +25,12 @@ protected:
     void TearDown() {
     }
 
+    void printPolynomial(const Polynomial& poly ){
+        for(int i=poly.order; i >=0 ; i--){
+            cout << i<< "(" << poly.coeficients[i] << ") ";
+        }
+        cout << endl;
+    }
 
 };
 
@@ -86,10 +92,10 @@ TEST_F(PolynomialFixture, IncreaseOrderTo3)
     
     ASSERT_EQ (3, res.order);
     ASSERT_EQ (4, res.coeficients.size());
-    ASSERT_EQ (0, res.coeficients[0]);
+    ASSERT_EQ (0, res.coeficients[res.order]);
     
     for(int i=res.order-1; i >=0 ; i--){
-        ASSERT_EQ (vec1[i], res.coeficients[i+1]);
+        ASSERT_EQ (vec1[i], res.coeficients[i]);
     }
     
 }
@@ -113,5 +119,48 @@ TEST_F(PolynomialFixture, SubtractPolynomials)
     
     ASSERT_EQ (order, res.order);
     ASSERT_EQ (size, res.coeficients.size());
+    
+    for(int i=res.order; i >=0 ; i--){
+        double result = res.coeficients[i]; 
+        double expected = p1.coeficients[i] - p2.coeficients[i];
+        ASSERT_EQ (expected, result);
+    }
+    
+}
+
+TEST_F(PolynomialFixture, SubtractPolynomialsP1GreaterThanP2)
+{
+    int order = 3;
+    int size = order + 1;
+    vector<double> vec1; 
+    for (int i = order; i >= 0; i--) 
+        vec1.push_back(i+2); 
+    
+    order = 2;
+    size = order + 1;
+    vector<double> vec2; 
+    for (int i = order; i >= 0; i--) 
+        vec2.push_back(i+4); 
+    
+    Polynomial p1(vec1);
+    Polynomial p2(vec2);
+    
+    p1.printPolynomial(p1);
+    p2.printPolynomial(p2);
+    
+    Polynomial res = p1 - p2;
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (2, p1.coeficients[p1.order] - 0);
+        
+    for(int i=res.order-1; i >=0 ; i--){
+        double result = res.coeficients[i]; 
+        double expected = p1.coeficients[i] - p2.coeficients[i];
+        ASSERT_EQ (expected, result);
+    }
     
 }

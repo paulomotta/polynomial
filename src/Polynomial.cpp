@@ -22,19 +22,22 @@ Polynomial::Polynomial(const Polynomial& orig) {
 Polynomial::~Polynomial() {
 }
 
-Polynomial Polynomial::increaseOrderTo(int order){
-    if (this->order >= order) return *this;
+Polynomial Polynomial::increaseOrderTo(int order) const{
+    if (this->order >= order){
+        Polynomial p(this->coeficients);
+        return p;
+    }
     
     vector<double> increased;
     
     int diff = order - this->order;
 
-    for (int i=0; i < diff; i++){
-        increased.push_back(0.);
-    }
-    
     for (int i=0; i < this->coeficients.size(); i++){
         increased.push_back(this->coeficients[i]);
+    }
+    
+    for (int i=0; i < diff; i++){
+        increased.push_back(0.);
     }
     
     Polynomial p(increased);
@@ -44,12 +47,33 @@ Polynomial Polynomial::operator- (const Polynomial& other){
     //TODO change to smart_pointer
     Polynomial res;
     
-    if (this->order >= other.order){
-        int index = this->order;
-        
+    if (this->order > other.order){
+        res = other.increaseOrderTo(this->order);
+        printPolynomial(res);
+        for (int i=0; i <= res.order; i++){
+            res.coeficients[i] = this->coeficients[i] - other.coeficients[i]; 
+        }
+    } else if (this->order < other.order) {
+        res = this->increaseOrderTo(other.order);
+        Polynomial r(*this);
+        for (int i=0; i <= res.order; i++){
+            r.coeficients[i] -= res.coeficients[i]; 
+        }
+        res = r;
     } else {
-        
+        Polynomial r(*this);
+        for (int i=0; i <= this->order; i++){
+            r.coeficients[i] -= other.coeficients[i]; 
+        }
+        res = r;
     }
     
     return res;
 }
+
+void Polynomial::printPolynomial(const Polynomial& poly )const{
+        for(int i=poly.order; i >=0 ; i--){
+            cout << poly.coeficients[i] << "x^" << i << " + ";
+        }
+        cout << endl;
+    }
