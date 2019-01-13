@@ -12,10 +12,29 @@ Polynomial::Polynomial(const vector<double>& coeficients): order(0){
     this->order = this->coeficients.size() - 1;
 }
 
-Polynomial::Polynomial(const Polynomial& orig): order(0) {
-    
+Polynomial::Polynomial(const Polynomial& orig) {
+    this->coeficients = orig.coeficients;
+    this->order = orig.order;
 }
 
 Polynomial::~Polynomial() {
 }
 
+Polynomial &Polynomial::increaseOrderTo(int order){
+    if (this->order >= order) return *this;
+    
+    
+}
+Polynomial &Polynomial::operator- (const Polynomial& other){
+    //TODO change to smart_pointer
+    Polynomial res;
+    
+    if (this->order >= other.order){
+        int index = this->order;
+        
+    } else {
+        
+    }
+    
+    return res;
+}

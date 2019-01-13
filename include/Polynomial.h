@@ -14,10 +14,15 @@ using namespace std;
 
 class Polynomial {
 public:
-    Polynomial(): order(0) {};
+    Polynomial():order(0){};
     Polynomial(const Polynomial& orig);
     Polynomial(const vector<double>& coeficients);
     virtual ~Polynomial();
+    
+    Polynomial& operator- (const Polynomial&);
+    
+    Polynomial& increaseOrderTo(int order);
+    
     vector<double> coeficients;
     int order;
 private:
