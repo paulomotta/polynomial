@@ -19,9 +19,9 @@ public:
     Polynomial(const vector<double>& coeficients);
     virtual ~Polynomial();
     
-    Polynomial& operator- (const Polynomial&);
+    Polynomial operator- (const Polynomial&);
     
-    Polynomial& increaseOrderTo(int order);
+    Polynomial increaseOrderTo(int order);
     
     vector<double> coeficients;
     int order;

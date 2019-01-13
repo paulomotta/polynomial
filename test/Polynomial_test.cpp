@@ -65,6 +65,33 @@ TEST_F(PolynomialFixture, IncreaseOrderToEqual)
     ASSERT_EQ (3, res.coeficients.size());
     ASSERT_EQ (4, res.coeficients[0]);
     
+    for(int i=res.order; i >=0 ; i--){
+        ASSERT_EQ (vec1[i], res.coeficients[i]);
+    }
+    
+}
+
+TEST_F(PolynomialFixture, IncreaseOrderTo3)
+{
+    int order = 2;
+    int size = order + 1;
+    vector<double> vec1; 
+    for (int i = order; i >= 0; i--) 
+        vec1.push_back(i+2); 
+    
+    Polynomial p1(vec1);
+    ASSERT_EQ (order, p1.order);
+    
+    Polynomial res = p1.increaseOrderTo(3);
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    ASSERT_EQ (0, res.coeficients[0]);
+    
+    for(int i=res.order-1; i >=0 ; i--){
+        ASSERT_EQ (vec1[i], res.coeficients[i+1]);
+    }
+    
 }
 
 TEST_F(PolynomialFixture, SubtractPolynomials)
