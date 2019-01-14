@@ -21,6 +21,8 @@ public:
     
     Polynomial operator- (const Polynomial&);
     
+    Polynomial operator/ (const Polynomial&);
+    
     Polynomial increaseOrderTo(int order) const;
     
     void printPolynomial(const Polynomial& poly )const;

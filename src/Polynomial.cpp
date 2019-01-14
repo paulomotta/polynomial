@@ -43,6 +43,7 @@ Polynomial Polynomial::increaseOrderTo(int order) const{
     Polynomial p(increased);
     return p;
 }
+
 Polynomial Polynomial::operator- (const Polynomial& other){
     //TODO change to smart_pointer
     Polynomial res;
@@ -67,6 +68,13 @@ Polynomial Polynomial::operator- (const Polynomial& other){
         res = r;
     }
     
+    return res;
+}
+
+Polynomial Polynomial::operator/ (const Polynomial& other){
+
+    Polynomial res;
+        
     return res;
 }
 
