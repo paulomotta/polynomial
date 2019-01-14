@@ -57,9 +57,8 @@ Polynomial Polynomial::operator- (const Polynomial& other){
         res = this->increaseOrderTo(other.order);
         Polynomial r(*this);
         for (int i=0; i <= res.order; i++){
-            r.coeficients[i] -= res.coeficients[i]; 
+            res.coeficients[i] = this->coeficients[i] - other.coeficients[i];
         }
-        res = r;
     } else {
         Polynomial r(*this);
         for (int i=0; i <= this->order; i++){
