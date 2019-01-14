@@ -265,3 +265,18 @@ TEST_F(PolynomialFixture, TrimPolynomial)
     ASSERT_EQ (-1, res.coeficients[res.order-2] );
     
 }
+
+TEST_F(PolynomialFixture, PolynomialWithOrder)
+{   
+    Polynomial res(2);
+    
+    ASSERT_EQ (2, res.order);
+    ASSERT_EQ (3, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (0, res.coeficients[res.order] );
+    ASSERT_EQ (0, res.coeficients[res.order-1] );
+    ASSERT_EQ (0, res.coeficients[res.order-2] );
+
+}

@@ -15,6 +15,7 @@ using namespace std;
 class Polynomial {
 public:
     Polynomial():order(0){};
+    Polynomial(const int order);
     Polynomial(const Polynomial& orig);
     Polynomial(const vector<double>& coeficients);
     virtual ~Polynomial();

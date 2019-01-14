@@ -14,6 +14,13 @@ Polynomial::Polynomial(const vector<double>& coeficients): order(0){
     this->order = this->coeficients.size() - 1;
 }
 
+Polynomial::Polynomial(const int order){
+    for (int i=0; i <= order; i++){
+        this->coeficients.push_back(0.);
+    }
+    this->order = order; 
+}
+
 Polynomial::Polynomial(const Polynomial& orig) {
     this->coeficients = orig.coeficients;
     this->order = orig.order;
