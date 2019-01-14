@@ -238,3 +238,30 @@ TEST_F(PolynomialFixture, DividePolynomialsP1P2)
     ASSERT_EQ (1, res.coeficients[res.order-2] );
     
 }
+
+TEST_F(PolynomialFixture, TrimPolynomial)
+{
+    int order = 4;
+    int size = order + 1;
+    vector<double> vec1; 
+    vec1.push_back(-1);
+    vec1.push_back(9);
+    vec1.push_back(-7);
+    vec1.push_back(0);
+    vec1.push_back(0);
+    
+    Polynomial p1(vec1);
+    p1.printPolynomial(p1);
+    
+    Polynomial res = p1.trim();
+    
+    ASSERT_EQ (2, res.order);
+    ASSERT_EQ (3, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (-7, res.coeficients[res.order] );
+    ASSERT_EQ (9, res.coeficients[res.order-1] );
+    ASSERT_EQ (-1, res.coeficients[res.order-2] );
+    
+}

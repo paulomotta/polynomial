@@ -47,6 +47,21 @@ Polynomial Polynomial::increaseOrderTo(int order) const{
     return p;
 }
 
+Polynomial Polynomial::trim() const{
+    vector<double> trimmed;
+    bool found = false;
+    for (int i=this->order; i>=0; i--){
+        if (this->coeficients[i] == 0 && !found) {
+            continue;
+        } else {
+            trimmed.insert(trimmed.begin(),this->coeficients[i]);
+            found =  true;
+        }
+    }
+    Polynomial res(trimmed);
+    return res;
+}
+
 Polynomial Polynomial::operator- (const Polynomial& other){
     //TODO change to smart_pointer
     Polynomial res;

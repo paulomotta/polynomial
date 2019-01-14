@@ -25,6 +25,8 @@ public:
     
     Polynomial increaseOrderTo(int order) const;
     
+    Polynomial trim() const;
+    
     void printPolynomial(const Polynomial& poly )const;
     
     vector<double> coeficients;
