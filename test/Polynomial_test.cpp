@@ -204,37 +204,37 @@ TEST_F(PolynomialFixture, SubtractPolynomialsP2GreaterThanP1)
 
 TEST_F(PolynomialFixture, DividePolynomialsP1P2)
 {
-    int order = 3;
+    int order = 4;
     int size = order + 1;
     vector<double> vec1; 
-    for (int i = order; i >= 0; i--) 
-        vec1.push_back(i+2); 
+    vec1.push_back(-1);
+    vec1.push_back(9);
+    vec1.push_back(-7);
+    vec1.push_back(1);
+    vec1.push_back(1);
+    
+    Polynomial p1(vec1);
+    p1.printPolynomial(p1);
     
     order = 2;
     size = order + 1;
     vector<double> vec2; 
-    for (int i = order; i >= 0; i--) 
-        vec2.push_back(i+4); 
+    vec2.push_back(-2);
+    vec2.push_back(3);
+    vec2.push_back(1);
     
-    Polynomial p1(vec1);
     Polynomial p2(vec2);
-    
-    p1.printPolynomial(p1);
     p2.printPolynomial(p2);
     
     Polynomial res = p1 / p2;
     
-//    ASSERT_EQ (3, res.order);
-//    ASSERT_EQ (4, res.coeficients.size());
-//    
-//    res.printPolynomial(res);
-//    
-//    ASSERT_EQ (4, p2.coeficients[p2.order] - 0);
-//        
-//    for(int i=res.order-1; i >=0 ; i--){
-//        double result = res.coeficients[i]; 
-//        double expected = p2.coeficients[i] - p1.coeficients[i];
-//        ASSERT_EQ (expected, result);
-//    }
+    ASSERT_EQ (2, res.order);
+    ASSERT_EQ (3, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (1, res.coeficients[res.order] );
+    ASSERT_EQ (-2, res.coeficients[res.order-1] );
+    ASSERT_EQ (1, res.coeficients[res.order-2] );
     
 }
