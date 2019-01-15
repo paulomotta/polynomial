@@ -538,3 +538,59 @@ TEST_F(PolynomialFixture, ModuloPolynomialsP1P2)
     ASSERT_EQ (1, res.coeficients[res.order-1] );
     
 }
+
+TEST_F(PolynomialFixture, NotCongruentPolynomialsP1P2)
+{
+    int order = 4;
+    int size = order + 1;
+    vector<double> vec1; 
+    vec1.push_back(-1);
+    vec1.push_back(9);
+    vec1.push_back(-7);
+    vec1.push_back(1);
+    vec1.push_back(1);
+    
+    Polynomial p1(vec1);
+    p1.printPolynomial(p1);
+    
+    order = 2;
+    size = order + 1;
+    vector<double> vec2; 
+    vec2.push_back(-2);
+    vec2.push_back(3);
+    vec2.push_back(1);
+    
+    Polynomial p2(vec2);
+    p2.printPolynomial(p2);
+    
+    bool res = p1.isCongruent(p2);
+    cout << res << endl;
+    ASSERT_FALSE (res);
+    
+}
+
+TEST_F(PolynomialFixture, CongruentPolynomialsP1P2)
+{
+    int order = 3;
+    int size = order + 1;
+    
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 4;
+    p1[order-2] = 1;
+    p1[order-3] = -6;
+    p1.printPolynomial(p1);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 2;
+    
+    p2.printPolynomial(p2);
+    
+    bool res = p1.isCongruent(p2);
+    cout << res << endl;
+    ASSERT_TRUE ( res);
+    
+}

@@ -182,6 +182,14 @@ Polynomial Polynomial::operator% (const Polynomial& other){
     
 }
 
+bool Polynomial::isCongruent(const Polynomial& poly){
+    Polynomial rest = *this % poly;
+    rest = rest.trim();
+    cout << rest.order << " " <<rest[0] << endl;
+    printPolynomial(rest);
+    return (rest.order == -1 && rest[0] == 0);
+}
+
 void Polynomial::printPolynomial(const Polynomial& poly )const{
         for(int i=poly.order; i >=0 ; i--){
             cout << poly.coeficients[i] << "x^" << i << " + ";

@@ -38,6 +38,8 @@ public:
     
     void printPolynomial(const Polynomial& poly )const;
     
+    bool isCongruent(const Polynomial& poly);
+    
     vector<double> coeficients;
     int order;
 private:
