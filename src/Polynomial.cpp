@@ -115,15 +115,16 @@ Polynomial Polynomial::operator/ (const Polynomial& other){
     Polynomial rest = *this - subtractor;
     rest = rest.trim();
     
-    if (rest.order < other.order) {
-        return quocient;
-    } else {
+    if (rest.order >= other.order) {
         Polynomial p = rest / other;
         p = p.increaseOrderTo(quocientOrder);
-        for (int i=0; i <= quocientOrder; i++) {
+        for (int i=0; i < quocientOrder; i++) {
             quocient[i] = quocient[i] + p[i]; 
         }
     }
+    
+    return quocient;
+    
 }
 
 void Polynomial::printPolynomial(const Polynomial& poly )const{
