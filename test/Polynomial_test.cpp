@@ -466,3 +466,75 @@ TEST_F(PolynomialFixture, MultiplyPolynomialsP2EqualOrderP1)
     ASSERT_EQ (-20, res.coeficients[res.order-3] );
     
 }
+
+TEST_F(PolynomialFixture, ModuloPolynomialsP1P2WithRestZero)
+{
+    int order = 3;
+    int size = order + 1;
+    
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 4;
+    p1[order-2] = 1;
+    p1[order-3] = -6;
+    p1.printPolynomial(p1);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 2;
+    
+    p2.printPolynomial(p2);
+    
+    Polynomial res = p1 % p2;
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    
+    
+    ASSERT_EQ (0, res.coeficients[res.order] );
+    ASSERT_EQ (0, res.coeficients[res.order-1] );
+    ASSERT_EQ (0, res.coeficients[res.order-2] );
+    ASSERT_EQ (0, res.coeficients[res.order-2] );
+    
+}
+
+TEST_F(PolynomialFixture, ModuloPolynomialsP1P2)
+{
+    int order = 4;
+    int size = order + 1;
+    vector<double> vec1; 
+    vec1.push_back(-1);
+    vec1.push_back(9);
+    vec1.push_back(-7);
+    vec1.push_back(1);
+    vec1.push_back(1);
+    
+    Polynomial p1(vec1);
+    p1.printPolynomial(p1);
+    
+    order = 2;
+    size = order + 1;
+    vector<double> vec2; 
+    vec2.push_back(-2);
+    vec2.push_back(3);
+    vec2.push_back(1);
+    
+    Polynomial p2(vec2);
+    p2.printPolynomial(p2);
+    
+    Polynomial res = p1 % p2;
+    res.printPolynomial(res);
+    
+    res = res.trim();
+    
+    ASSERT_EQ (1, res.order);
+    ASSERT_EQ (2, res.coeficients.size());
+    
+    
+    ASSERT_EQ (2, res.coeficients[res.order] );
+    ASSERT_EQ (1, res.coeficients[res.order-1] );
+    
+}

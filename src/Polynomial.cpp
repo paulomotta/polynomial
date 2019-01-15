@@ -172,6 +172,16 @@ Polynomial Polynomial::operator* (const Polynomial& other){
     
 }
 
+Polynomial Polynomial::operator% (const Polynomial& other){
+
+    Polynomial divided = *this / other;
+    
+    Polynomial rest = *this - (divided * other);
+    
+    return rest;
+    
+}
+
 void Polynomial::printPolynomial(const Polynomial& poly )const{
         for(int i=poly.order; i >=0 ; i--){
             cout << poly.coeficients[i] << "x^" << i << " + ";

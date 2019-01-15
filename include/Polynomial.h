@@ -27,6 +27,8 @@ public:
     Polynomial operator+ (const Polynomial&);
     
     Polynomial operator* (const Polynomial&);
+
+    Polynomial operator% (const Polynomial&);
     
     inline double& operator[] (int x) { return coeficients[x]; }
     
