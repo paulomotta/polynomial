@@ -432,3 +432,37 @@ TEST_F(PolynomialFixture, CoeficientsAccess)
     ASSERT_EQ (1, res.coeficients[res.order-2] );
 
 }
+
+TEST_F(PolynomialFixture, MultiplyPolynomialsP2EqualOrderP1)
+{
+    int order = 2;
+    int size = order + 1;
+    
+    Polynomial p2(order);
+    p2[order] = 3;
+    p2[order-1] = 0;
+    p2[order-2] = -4;
+    p2.printPolynomial(p2);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p1(order);
+    p1[order] = -2;
+    p1[order-1] = 5;
+    
+    p1.printPolynomial(p1);
+    
+    Polynomial res = p1 * p2;
+    res = res.trim();
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    
+    
+    ASSERT_EQ (-6, res.coeficients[res.order] );
+    ASSERT_EQ (15, res.coeficients[res.order-1] );
+    ASSERT_EQ (8, res.coeficients[res.order-2] );
+    ASSERT_EQ (-20, res.coeficients[res.order-3] );
+    
+}

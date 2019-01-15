@@ -83,7 +83,7 @@ Polynomial Polynomial::operator- (const Polynomial& other){
         }
     } else if (this->order < other.order) {
         res = this->increaseOrderTo(other.order);
-        Polynomial r(*this);
+        //Polynomial r(*this);
         for (int i=0; i <= res.order; i++){
             res.coeficients[i] = this->coeficients[i] - other.coeficients[i];
         }
@@ -147,6 +147,25 @@ Polynomial Polynomial::operator+ (const Polynomial& other){
             r.coeficients[i] += other.coeficients[i]; 
         }
         res = r;
+    }
+    
+    return res;
+    
+}
+
+Polynomial Polynomial::operator* (const Polynomial& other){
+
+    Polynomial p1 = this->trim();
+    Polynomial p2 = other.trim();
+    
+    int order = p1.order + p2.order;
+    
+    Polynomial res(order);
+    
+    for(int i=p1.order; i>=0; i--){
+        for(int j=p2.order; j>=0; j--){
+            res[i+j] = res[i+j] + (p1[i] * p2[j]);
+        }
     }
     
     return res;
