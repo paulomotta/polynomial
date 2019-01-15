@@ -280,3 +280,21 @@ TEST_F(PolynomialFixture, PolynomialWithOrder)
     ASSERT_EQ (0, res.coeficients[res.order-2] );
 
 }
+
+TEST_F(PolynomialFixture, CoeficientsAccess)
+{   
+    Polynomial res(2);
+    res[0] = 1;
+    res[1] = 2;
+    res[2] = 3;
+    
+    ASSERT_EQ (2, res.order);
+    ASSERT_EQ (3, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (3, res.coeficients[res.order] );
+    ASSERT_EQ (2, res.coeficients[res.order-1] );
+    ASSERT_EQ (1, res.coeficients[res.order-2] );
+
+}
