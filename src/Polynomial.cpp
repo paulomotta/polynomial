@@ -100,88 +100,30 @@ Polynomial Polynomial::operator- (const Polynomial& other){
 
 Polynomial Polynomial::operator/ (const Polynomial& other){
 
-    Polynomial res;
-    
-    
-    double value = this->coeficients[this->order] / other.coeficients[other.order];
+    double quocientCoeficient = this->coeficients[this->order] / other.coeficients[other.order];
     double quocientOrder = this->order - other.order;
-    cout <<quocientOrder<< " " << value<< endl; 
-    vector<double> quocientValues;
-    for (int i=0; i< quocientOrder; i++){
-        quocientValues.push_back(0.);
-    }
-    quocientValues.push_back(value);
     
-    vector<double> subtractor;
-    for (int i=0; i <= this->order; i++){
-        subtractor.push_back(0.);
+    Polynomial quocient(quocientOrder);
+    quocient[quocientOrder] = quocientCoeficient;
+    
+    Polynomial subtractor(this->order);
+    
+    for (int i=other.order; i >= 0; i--) {
+        subtractor[quocientOrder + (other.order - i)] = quocientCoeficient * other.coeficients[(other.order - i)];
     }
     
-    subtractor[quocientOrder + other.order] = value * other.coeficients[other.order];
-    subtractor[quocientOrder + other.order-1] = value * other.coeficients[other.order-1];
-    subtractor[quocientOrder + other.order-2] = value * other.coeficients[other.order-2];
+    Polynomial rest = *this - subtractor;
+    rest = rest.trim();
     
-    Polynomial sub(subtractor);
-    printPolynomial(sub);
-    
-    Polynomial partial1 = *this - sub;
-    printPolynomial(partial1);
-    
-    double value2 = partial1.coeficients[partial1.order-1] / other.coeficients[other.order];
-    cout << " partial1.order=" << partial1.order-1<< endl;
-    cout << " other.order=" << other.order<< endl;
-    double quocientOrder2 = (partial1.order-1) - other.order;
-    quocientValues[quocientOrder2]=value2;
-    cout <<quocientOrder2<< " " << value2<< endl; 
-    vector<double> subtractor2;
-    for (int i=0; i <= partial1.order-1; i++){
-        subtractor2.push_back(0.);
+    if (rest.order < other.order) {
+        return quocient;
+    } else {
+        Polynomial p = rest / other;
+        p = p.increaseOrderTo(quocientOrder);
+        for (int i=0; i <= quocientOrder; i++) {
+            quocient[i] = quocient[i] + p[i]; 
+        }
     }
-    
-    subtractor2[quocientOrder2 + other.order] = value2 * other.coeficients[other.order];
-    subtractor2[quocientOrder2 + other.order-1] = value2 * other.coeficients[other.order-1];
-    subtractor2[quocientOrder2 + other.order-2] = value2 * other.coeficients[other.order-2];
-    
-    cout << "partial1.order=" << partial1.order <<endl;
-    printPolynomial(partial1);
-    
-    Polynomial sub2(subtractor2);
-    printPolynomial(sub2);
-    
-    cout << "sub2.order=" << sub2.order <<endl;
-    Polynomial partial2 = partial1 - sub2;
-    printPolynomial(partial2);
-    cout << "partial2.coeficients[partial2.order-2]=" << partial2.coeficients[partial2.order-2]<< endl;
-    cout << "other.coeficients[other.order]=" << other.coeficients[other.order] << endl;
-    double value3 = partial2.coeficients[partial2.order-2] / other.coeficients[other.order];
-    cout << " partial2.order=" << partial2.order-2<< endl;
-    cout << " other.order=" << other.order<< endl;
-    double quocientOrder3 = (partial2.order-2) - other.order;
-    quocientValues[quocientOrder3]=value3;
-    cout <<quocientOrder3<< " " << value3<< endl; 
-    vector<double> subtractor3;
-    for (int i=0; i <= partial2.order-2; i++){
-        subtractor3.push_back(0.);
-    }
-    
-    subtractor3[quocientOrder3 + other.order] = value3 * other.coeficients[other.order];
-    subtractor3[quocientOrder3 + other.order-1] = value3 * other.coeficients[other.order-1];
-    subtractor3[quocientOrder3 + other.order-2] = value3 * other.coeficients[other.order-2];
-    
-    cout << "partial2.order=" << partial2.order <<endl;
-    printPolynomial(partial2);
-    
-    Polynomial sub3(subtractor3);
-    cout << "sub3.order=" << sub3.order <<endl;
-    printPolynomial(sub3);
-    
-    Polynomial partial3 = partial2 - sub3;
-    printPolynomial(partial3);
-    
-    Polynomial quocient(quocientValues);
-    printPolynomial(quocient);
-    
-    return quocient;
 }
 
 void Polynomial::printPolynomial(const Polynomial& poly )const{

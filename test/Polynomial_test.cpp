@@ -239,6 +239,39 @@ TEST_F(PolynomialFixture, DividePolynomialsP1P2)
     
 }
 
+TEST_F(PolynomialFixture, DividePolynomialsP1P2WithRestZero)
+{
+    int order = 3;
+    int size = order + 1;
+    
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 4;
+    p1[order-2] = 1;
+    p1[order-3] = -6;
+    p1.printPolynomial(p1);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 2;
+    
+    p2.printPolynomial(p2);
+    
+    Polynomial res = p1 / p2;
+    
+    ASSERT_EQ (2, res.order);
+    ASSERT_EQ (3, res.coeficients.size());
+    
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (1, res.coeficients[res.order] );
+    ASSERT_EQ (2, res.coeficients[res.order-1] );
+    ASSERT_EQ (-3, res.coeficients[res.order-2] );
+    
+}
+
 TEST_F(PolynomialFixture, TrimPolynomial)
 {
     int order = 4;
