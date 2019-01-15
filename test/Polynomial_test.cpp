@@ -272,6 +272,107 @@ TEST_F(PolynomialFixture, DividePolynomialsP1P2WithRestZero)
     
 }
 
+TEST_F(PolynomialFixture, AdditionPolynomialsP1GreaterThanP2)
+{
+    int order = 3;
+    int size = order + 1;
+    
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 4;
+    p1[order-2] = 1;
+    p1[order-3] = -6;
+    p1.printPolynomial(p1);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 2;
+    
+    p2.printPolynomial(p2);
+    
+    Polynomial res = p1 + p2;
+    res = res.trim();
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    
+    
+    ASSERT_EQ (1, res.coeficients[res.order] );
+    ASSERT_EQ (4, res.coeficients[res.order-1] );
+    ASSERT_EQ (2, res.coeficients[res.order-2] );
+    ASSERT_EQ (-4, res.coeficients[res.order-3] );
+    
+}
+
+TEST_F(PolynomialFixture, AdditionPolynomialsP2GreaterThanP1)
+{
+    int order = 3;
+    int size = order + 1;
+    
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 4;
+    p2[order-2] = 1;
+    p2[order-3] = -6;
+    p2.printPolynomial(p2);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 2;
+    
+    p1.printPolynomial(p1);
+    
+    Polynomial res = p1 + p2;
+    res = res.trim();
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (3, res.order);
+    ASSERT_EQ (4, res.coeficients.size());
+    
+    
+    ASSERT_EQ (1, res.coeficients[res.order] );
+    ASSERT_EQ (4, res.coeficients[res.order-1] );
+    ASSERT_EQ (2, res.coeficients[res.order-2] );
+    ASSERT_EQ (-4, res.coeficients[res.order-3] );
+    
+}
+
+TEST_F(PolynomialFixture, AdditionPolynomialsP2EqualOrderP1)
+{
+    int order = 1;
+    int size = order + 1;
+    
+    Polynomial p2(order);
+    p2[order] = 1;
+    p2[order-1] = 4;
+    p2.printPolynomial(p2);
+    
+    order = 1;
+    size = order + 1;
+    Polynomial p1(order);
+    p1[order] = 1;
+    p1[order-1] = 2;
+    
+    p1.printPolynomial(p1);
+    
+    Polynomial res = p1 + p2;
+    res = res.trim();
+    res.printPolynomial(res);
+    
+    ASSERT_EQ (1, res.order);
+    ASSERT_EQ (2, res.coeficients.size());
+    
+    
+    ASSERT_EQ (2, res.coeficients[res.order] );
+    ASSERT_EQ (6, res.coeficients[res.order-1] );
+    
+}
+
 TEST_F(PolynomialFixture, TrimPolynomial)
 {
     int order = 4;

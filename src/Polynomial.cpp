@@ -127,6 +127,32 @@ Polynomial Polynomial::operator/ (const Polynomial& other){
     
 }
 
+Polynomial Polynomial::operator+ (const Polynomial& other){
+
+    Polynomial res;
+    if (this->order > other.order){
+        res = other.increaseOrderTo(this->order);
+        for (int i=0; i <= res.order; i++){
+            res.coeficients[i] = this->coeficients[i] + res.coeficients[i]; 
+        }
+    } else if (this->order < other.order) {
+        res = this->increaseOrderTo(other.order);
+        Polynomial r(*this);
+        for (int i=0; i <= res.order; i++){
+            res.coeficients[i] = this->coeficients[i] + other.coeficients[i];
+        }
+    } else {
+        Polynomial r(*this);
+        for (int i=0; i <= this->order; i++){
+            r.coeficients[i] += other.coeficients[i]; 
+        }
+        res = r;
+    }
+    
+    return res;
+    
+}
+
 void Polynomial::printPolynomial(const Polynomial& poly )const{
         for(int i=poly.order; i >=0 ; i--){
             cout << poly.coeficients[i] << "x^" << i << " + ";
